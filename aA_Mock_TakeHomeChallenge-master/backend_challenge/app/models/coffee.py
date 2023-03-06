@@ -28,3 +28,8 @@ class Coffee(db.Model):
             "createdAt": self.created_at,
             "updatedAt": self.updated_at
         }
+
+    def name(self):
+        return{
+            'name': self.name
+        }

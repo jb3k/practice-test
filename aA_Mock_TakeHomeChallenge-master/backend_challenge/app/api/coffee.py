@@ -13,6 +13,9 @@ def get_status():
 @coffee_routes.route('/coffee', methods=['GET'])
 def get_coffee():
     # get index of all coffees in asc order by name
+    coffees = Coffee.query.all()
+    return {'coffees': [items.name().sort() for items in coffee]}
+
 
 
 @coffee_routes.route('/coffee/<int:id>', methods=['GET'])
@@ -46,7 +49,7 @@ def delete_coffee(id):
     coffeId = Coffee.query.get(id)
 
     if coffeId == None:
-        return{"error": "coffee couldn't be found"}, 404
+        return {"error": "coffee couldn't be found"}, 404
     db.session.delete(coffeeId)
     db.session.commit()
     return {'message': Successfully deleted}

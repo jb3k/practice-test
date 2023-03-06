@@ -27,3 +27,8 @@ class Post(db.Model):
             "createdAt": self.created_at,
             "updatedAt": self.updated_at
         }
+
+    def post_date(self):
+        return {
+            'createdAt': self.created_at
+        }
