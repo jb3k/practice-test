@@ -7,4 +7,4 @@ class CoffeeForm(FlaskForm):
   
     name = StringField('Name', validators=[DataRequired()])
     year = IntegerField(4, validators=[DataRequired()])
-    quantity = DecimalField(2, places=2, validators=[DataRequired()])
+    caffine = DecimalField(2, places=2, validators=[DataRequired()])

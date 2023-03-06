@@ -1,4 +1,6 @@
 from flask import Blueprint, session, request, redirect
+from app.forms import CoffeeForm
+from app.models import Coffee
 
 
 coffee_routes = Blueprint('coffee', __name__)
@@ -23,7 +25,20 @@ def get_coffee_id():
 
 @coffee_routes.route('/coffee/create', methods=['POST'])
 def create_coffee():
-    
+    form = CoffeeForm()
+    all_coffees = Coffee.query.all()
+
+    if form.validate_on_submit():
+        new_coffee = Coffee(
+            name = form.data['name'],
+            year = form.data['year'],
+            caffine = form.data['caffine']
+        )
+        db.session.add(new_coffee)
+        db.session.commit()
+        return {'coffee': [items.to_dict for items in all_coffees]}
+    return {'error': validation_errors_to_error_message(CoffeeForm.errors)}, 400
+
 
 
 @coffee_routes.route('/coffee/delete/<int:id>', methods=['DELETE'])
